@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+  mariadb:
+    container_name: db
+    image: mariadb:10.3
+    restart: always
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d/
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "1"
+      MYSQL_PASSWORD: "${DBP}"
+      MYSQL_USER: "${DBU}"
+      MYSQL_DATABASE: "${DB}"
+  drupal:
+    container_name: drupal_interface
+    build: .
+    restart: always
+    ports:
+      - 9998:80
+    working_dir: /opt
+    volumes:
+      - .:/opt:z
+    command: bash -c "composer update --prefer-dist && rm /var/www/html && ln -s /opt/web /var/www/html && /usr/local/bin/apache2-foreground"
