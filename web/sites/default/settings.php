@@ -794,15 +794,17 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
 # if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
+
 $databases['default']['default'] = array (
-  'database' => 'cloud_db',
-  'username' => 'cloud_user',
-  'password' => 'safepassword',
+  'database' => $_ENV['DB'],
+  'username' => $_ENV['DB_USER'],
+  'password' => $_ENV['DB_PASS'],
   'prefix' => '',
-  'host' => '127.0.0.1',
+  'host' => $_ENV['DB_HOST'],
   'port' => '3306',
   'namespace' => 'Drupal\\mysql\\Driver\\Database\\mysql',
   'driver' => 'mysql',
   'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
 );
+
 $settings['config_sync_directory'] = 'sites/default/files/config_6Bo2lbTGs_8ip2sLJyepSVPuBFaZwHI5zxU0Vztp3v8jehXm4TIdzQQpOr32GZFKrsXLs40VdQ/sync';
