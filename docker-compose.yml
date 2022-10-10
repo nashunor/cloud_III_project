@@ -21,4 +21,9 @@ services:
     working_dir: /opt
     volumes:
       - .:/opt:z
+    environment:
+      DB_HOST: "${DB_HOST}"
+      DB: "${DB}"
+      DB_USER: "${DB_USER}"
+      DB_PASS: "${DB_PASS}"
     command: bash -c "composer update --prefer-dist && rm /var/www/html && ln -s /opt/web /var/www/html && /usr/local/bin/apache2-foreground"
